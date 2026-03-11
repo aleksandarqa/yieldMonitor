@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yield Monitor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h1>Yield Monitor Dashboard</h1>
+
+<button onclick="toggleManualForm()">Manual Test</button>
+<button onclick="window.location.href='/docs'">View API</button>
+<button onclick="loadTests()">Load Tests</button>
+<button onclick="window.open('/test_yield.java')">View Script</button>
+
+<div id="manualFormContainer" style="display: none;">
+    <h2>Manual Testing</h2>
+
+    <form id="testForm">
+        <label for="serialNumber">Serial Number:</label>
+        <input type="text" id="serialNumber" required><br><br>
+
+        <label for="partNumber">Part Number:</label>
+        <select id="partNumber">
+            <option value="001PN001">001PN001</option>
+            <option value="002PN002">002PN002</option>
+            <option value="003PN003">003PN003</option>
+        </select><br><br>
+
+        <label for="status">Status (Pass):</label>
+        <input type="checkbox" id="status"><br><br>
+
+        <button type="button" onclick="addTest()">Add</button>
+    </form>
+</div>
+
+<h2>Tests</h2>
+<pre id="output">No data yet</pre>
+
+<h2>Stats</h2>
+<pre id="statsOutput">No stats yet</pre>
+<button onclick="loadStats()">Load Stats</button>
+
+<h2>Daily Testing Volume</h2>
+<button onclick="loadDailyChart()">Load Daily Chart</button><br><br>
+<canvas id="dailyChart" width="600" height="250"></canvas>
+
+<h2>Part Number Distribution</h2>
+<button onclick="loadPartChart()">Load Part Chart</button>
+
+<h2>Yield</h2>
+<div id="yieldDisplay">Select a part from the pie chart</div><br>
+
+<canvas id="partChart" width="600" height="250"></canvas>
+
+<script>
+    function toggleManualForm() {
+        const formContainer = document.getElementById('manualFormContainer');
+
+        if (formContainer.style.display === 'none') {
+            formContainer.style.display = 'block';
+        } else {
+            formContainer.style.display = 'none';
+        }
+    }
+
+    async function addTest() {
+        const data = {
+            serialNumber: document.getElementById('serialNumber').value,
+            partNumber: document.getElementById('partNumber').value,
+            status: document.getElementById('status').checked
+        };
+
+        await fetch('/tests', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        loadTests();
+        loadStats();
+        loadDailyChart();
+        loadPartChart();
+    }
+
+    async function loadTests() {
+        const response = await fetch('/tests');
+        const data = await response.json();
+        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function loadStats() {
+        const response = await fetch('/stats');
+        const data = await response.json();
+        document.getElementById('statsOutput').textContent = JSON.stringify(data, null, 2);
+    }
+
+    let dailyChart;
+
+    async function loadDailyChart() {
+        const response = await fetch('/daily');
+        const data = await response.json();
+
+        const labels = data.map(item => item.date);
+        const counts = data.map(item => item.count);
+
+        const ctx = document.getElementById('dailyChart').getContext('2d');
+
+        if (dailyChart) {
+            dailyChart.destroy();
+        }
+
+        dailyChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Units Tested',
+                    data: counts
+                }]
+            },
+            options: {
+                responsive: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    let partChart;
+
+    async function loadPartChart() {
+        const response = await fetch('/stats');
+        const data = await response.json();
+
+        const labels = data.map(item => item.partNumber);
+        const totals = data.map(item => item.total);
+
+        const ctx = document.getElementById('partChart').getContext('2d');
+
+        if (partChart) {
+            partChart.destroy();
+        }
+
+        partChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: totals
+                }]
+            },
+            options: {
+                responsive: false,
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const selectedPart = labels[index];
+                        const selectedYield = data[index].yield;
+
+                        document.getElementById('yieldDisplay').textContent =
+                            'Yield for ' + selectedPart + ': ' + selectedYield.toFixed(2) + '%';
+                    }
+                }
+            }
+        });
+    }
+    window.onload = function() {
+        loadTests();
+        loadStats();
+        loadDailyChart();
+        loadPartChart();
+    };
+</script>
+</body>
+</html>
