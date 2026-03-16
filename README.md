@@ -1,4 +1,4 @@
-<img width="1895" height="915" alt="image" src="https://github.com/user-attachments/assets/2473a167-5dfa-4f84-96be-eeb535b3300b" /># Yield Monitor Dashboard
+Yield Monitor Dashboard
 
 > A web-based application for tracking and analyzing manufacturing test results with real-time yield statistics and automated UI testing.
 
