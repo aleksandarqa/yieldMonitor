@@ -1,4 +1,4 @@
-# Yield Monitor Dashboard
+<img width="1895" height="915" alt="image" src="https://github.com/user-attachments/assets/2473a167-5dfa-4f84-96be-eeb535b3300b" /># Yield Monitor Dashboard
 
 > A web-based application for tracking and analyzing manufacturing test results with real-time yield statistics and automated UI testing.
 
@@ -139,6 +139,9 @@ ScreenSchots
 <img width="1900" height="915" alt="image" src="https://github.com/user-attachments/assets/7f63e7e7-94f5-4399-b81d-5dca6c4183d9" />
 <img width="1452" height="679" alt="image" src="https://github.com/user-attachments/assets/b1d59571-3ddb-4c83-9d00-a90834cab147" />
 <img width="1514" height="1018" alt="image" src="https://github.com/user-attachments/assets/498d578a-cd9e-4e5b-a7a4-9e8c0fa6c7ca" />
+<img width="1898" height="915" alt="image" src="https://github.com/user-attachments/assets/1aa6a504-309f-415e-bf29-dedc42dc1640" />
+<img width="1895" height="915" alt="image" src="https://github.com/user-attachments/assets/3832b43e-9858-4240-9988-cf14d84c4f92" />
+
 
 
 
