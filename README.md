@@ -128,3 +128,17 @@ The application can be deployed to platforms such as [Railway](https://railway.a
 5. Start the Spring Boot application
 
 Once deployed, the platform will provide a public URL where the dashboard can be accessed remotely.
+
+
+
+
+ScreenSchots 
+<img width="1883" height="906" alt="image" src="https://github.com/user-attachments/assets/f03d5d31-cc0e-4952-a6fc-069f282aa4da" />
+<img width="1892" height="914" alt="image" src="https://github.com/user-attachments/assets/23060602-f59c-40a7-8c1d-70d2d9f1d6a8" />
+<img width="1897" height="908" alt="image" src="https://github.com/user-attachments/assets/626c6719-e95a-4d24-897f-32d8681608c5" />
+<img width="1900" height="915" alt="image" src="https://github.com/user-attachments/assets/7f63e7e7-94f5-4399-b81d-5dca6c4183d9" />
+<img width="1452" height="679" alt="image" src="https://github.com/user-attachments/assets/b1d59571-3ddb-4c83-9d00-a90834cab147" />
+<img width="1514" height="1018" alt="image" src="https://github.com/user-attachments/assets/498d578a-cd9e-4e5b-a7a4-9e8c0fa6c7ca" />
+
+
+
