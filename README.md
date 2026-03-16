@@ -1,102 +1,27 @@
-Yield Monitor Dashboard
-
-This project is a simple web-based Yield Monitoring application. It allows manual entry of test results, displays production statistics on a dashboard, and validates yield calculation using a Selenium automation test.
-
-Yield is calculated using the formula:
-
-Yield = (Passed Units / Total Tested Units) × 100
-
-Example: 3 passed out of 5 tested = 60% yield.
-
-Features
-
-Backend API built with Spring Boot:
-
-POST /tests – insert a test record
-
-GET /tests – return all test records
-
-GET /stats – calculate yield statistics per part number
-
-GET /daily – return daily testing volume for the last 7 days
-
-Dashboard functionality:
-
-Manual test entry form
-
-Daily testing volume bar chart
-
-Part number distribution pie chart
-
-Yield display for selected part number
-
-Charts are implemented using Chart.js.
-
-Setup
-
-Clone the repository.
-
-Open the project in IntelliJ IDEA.
-
-Run the Spring Boot application:
-
 YieldMonitorApplication.java
-
-Open a browser and go to:
-
+5.Open the dashboard in your browser:
 http://localhost:8080
-
-The dashboard will load and you can insert manual test records.
-
-Automation Test
-
-A Selenium UI test verifies the yield calculation.
-
-Test scenario:
-
-Open the dashboard
-
-Click Manual Test
-
-Insert 5 records for part number 001PN001
-
-Set 3 Passed and 2 Failed
-
-Load the pie chart
-
-Select the part number slice
-
-Verify that the yield equals 60%
-
-Run the test class:
-
+The dashboard will load and you can begin inserting manual test records immediately.
+Running the Automation Test
+A Selenium UI test is included to validate yield calculation. The test scenario:
+6.Open the dashboard in a browser
+7.Click Manual Test to open the entry form
+8.Insert 5 records for part number 001PN001
+9.Set 3 as Passed and 2 as Failed
+10.Load the pie chart and select the part number slice
+11.Verify the displayed yield equals 60%
+To execute the test, run:
 YieldUITest.java
-
-The test prints PASS or FAIL depending on the result.
-
-Deployment
-
-The project can be deployed on platforms such as Railway or Render.
-
-Basic deployment steps:
-
-Push the project to a GitHub repository.
-
-Create a new project on Railway or Render.
-
-Connect the GitHub repository.
-
-Build the project using Gradle.
-
-Start the Spring Boot application.
-
-The platform will provide a public URL where the dashboard can be accessed.
-
-Technologies
-
-Java
-Spring Boot
-H2 Database
-Chart.js
-Selenium WebDriver
-Gradle
+The test prints PASS or FAIL to the console depending on the result.
+Cloud Deployment
+The application can be deployed to platforms such as
+Railway
+or
+Render
+:
+1.Push the project to a GitHub repository
+2.Create a new project on Railway or Render
+3.Connect the GitHub repository to the platform
+4.Configure the build using Gradle
+5.Start the Spring Boot application
+Once deployed, the platform will provide a public URL where the dashboard can be accessed remotely.
