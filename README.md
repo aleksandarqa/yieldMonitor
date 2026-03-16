@@ -1,27 +1,130 @@
-YieldMonitorApplication.java
-5.Open the dashboard in your browser:
-http://localhost:8080
+# Yield Monitor Dashboard
+
+> A web-based application for tracking and analyzing manufacturing test results with real-time yield statistics and automated UI testing.
+
+---
+
+## Table of Contents
+
+- [Description](#description)
+  - [Yield Formula](#yield-formula)
+  - [Key Features](#key-features)
+  - [REST API Endpoints](#rest-api-endpoints)
+  - [Technologies](#technologies)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Local Setup](#local-setup)
+  - [Running the Automation Test](#running-the-automation-test)
+  - [Cloud Deployment](#cloud-deployment)
+
+---
+
+## Description
+
+The Yield Monitor Dashboard is a web-based application for tracking and analyzing manufacturing test results. It enables manual entry of test records, displays real-time production statistics, and automates yield validation through Selenium UI testing.
+
+### Yield Formula
+
+Yield is calculated using the following formula:
+
+```
+Yield = (Passed Units / Total Tested Units) × 100
+```
+
+**Example:** 3 units passed out of 5 tested → **60% yield**
+
+### Key Features
+
+| Feature | Details |
+|---|---|
+| Backend API | Built with Spring Boot; exposes REST endpoints for test data management |
+| Manual Entry | Dashboard form for inserting individual test records |
+| Daily Volume Chart | Bar chart showing testing volume for the last 7 days |
+| Part Distribution | Pie chart showing part number distribution |
+| Yield Display | Per-part-number yield calculated and displayed on demand |
+| Automation Test | Selenium UI test that verifies yield calculation end-to-end |
+
+### REST API Endpoints
+
+| Endpoint | Description |
+|---|---|
+| `POST /tests` | Insert a new test record |
+| `GET /tests` | Retrieve all test records |
+| `GET /stats` | Calculate yield statistics per part number |
+| `GET /daily` | Return daily testing volume for the last 7 days |
+
+### Technologies
+
+| Technology | Purpose |
+|---|---|
+| Java Spring Boot | Backend REST API and application server |
+| H2 Database | Embedded in-memory relational database |
+| Chart.js | Frontend charting library (bar and pie charts) |
+| Selenium WebDriver | UI test automation framework |
+| Gradle | Build and dependency management tool |
+
+---
+
+## Installation
+
+### Prerequisites
+
+Before setting up the application, ensure the following are installed:
+
+- Java Development Kit (JDK) 11 or higher
+- IntelliJ IDEA (recommended IDE)
+- Git
+- Google Chrome and ChromeDriver (required for Selenium tests)
+
+### Local Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. **Open the project** in IntelliJ IDEA
+
+3. **Resolve dependencies** — allow Gradle to download all required packages
+
+4. **Run the application** by launching the main class:
+   ```
+   YieldMonitorApplication.java
+   ```
+
+5. **Open the dashboard** in your browser:
+   ```
+   http://localhost:8080
+   ```
+
 The dashboard will load and you can begin inserting manual test records immediately.
-Running the Automation Test
+
+### Running the Automation Test
+
 A Selenium UI test is included to validate yield calculation. The test scenario:
-6.Open the dashboard in a browser
-7.Click Manual Test to open the entry form
-8.Insert 5 records for part number 001PN001
-9.Set 3 as Passed and 2 as Failed
-10.Load the pie chart and select the part number slice
-11.Verify the displayed yield equals 60%
+
+1. Open the dashboard in a browser
+2. Click **Manual Test** to open the entry form
+3. Insert **5 records** for part number `001PN001`
+4. Set **3 as Passed** and **2 as Failed**
+5. Load the pie chart and select the part number slice
+6. Verify the displayed yield equals **60%**
+
 To execute the test, run:
+```
 YieldUITest.java
-The test prints PASS or FAIL to the console depending on the result.
-Cloud Deployment
-The application can be deployed to platforms such as
-Railway
-or
-Render
-:
-1.Push the project to a GitHub repository
-2.Create a new project on Railway or Render
-3.Connect the GitHub repository to the platform
-4.Configure the build using Gradle
-5.Start the Spring Boot application
+```
+
+The test prints `PASS` or `FAIL` to the console depending on the result.
+
+### Cloud Deployment
+
+The application can be deployed to platforms such as [Railway](https://railway.app) or [Render](https://render.com):
+
+1. Push the project to a GitHub repository
+2. Create a new project on Railway or Render
+3. Connect the GitHub repository to the platform
+4. Configure the build using Gradle
+5. Start the Spring Boot application
+
 Once deployed, the platform will provide a public URL where the dashboard can be accessed remotely.
