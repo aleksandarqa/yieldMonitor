@@ -12,6 +12,7 @@ public class YieldUITest {
     public void testYieldCalculation() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
 
         driver.get("http://localhost:8080");
 
@@ -24,7 +25,7 @@ public class YieldUITest {
             serial.sendKeys("AUTO_SN_" + i);
 
             WebElement part = driver.findElement(By.id("partNumber"));
-            part.sendKeys("001PN001");
+            part.sendKeys("002PN002");
 
             WebElement status = driver.findElement(By.id("status"));
 
